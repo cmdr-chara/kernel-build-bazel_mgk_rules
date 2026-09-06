@@ -6,10 +6,10 @@ def _impl(repository_ctx):
           value = repository_ctx.os.environ[key].strip()
       else:
           value = ""
-      repository_content += '{} = "{}"\n'.format(key, value)
+      repository_content += '{} = {}\n'.format(key, repr(value))
 
     for key, value in repository_ctx.attr.additional_values.items():
-        repository_content += '{} = "{}"\n'.format(key, value)
+        repository_content += '{} = {}\n'.format(key, repr(value))
 
     repository_ctx.file("BUILD", """
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
